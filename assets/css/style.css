@@ -15,6 +15,9 @@
   --main-bg-color: #ffffff;
   --main-text-color: #000000;
   --black-shadow: rgba(0, 0, 0, 0.3);
+  --button-color: #d8d8d8;
+  --overlay-page: #00000060;
+  --input-border: #b8bbc2;
 }
 
 * {
@@ -124,25 +127,150 @@ li {
   font-weight: 700;
 }
 
-/* Bannière */
-/* Bannière accueil */
+#menu-item-42 {
+  cursor: pointer;
+}
+
+/* Bannière page d'accueil */
 .banner {
-  background-color: var(--main-color);
   width: 100%;
-  height: 629px;
+  height: 962px;
   display: flex;
+  position: relative;
+  background-color: var(--main-color);
+  z-index: 727;
 }
 
 .banner_image {
+  position: relative;
   display: flex;
+  overflow: hidden;
+  /* z-index: 728; */
 }
 
 .banner img {
   height: 100%;
 }
 
-.banner h1 {
+.banner_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 729;
+  white-space: nowrap;
+}
+
+.banner_text p {
   font-size: 5.96rem;
+  font-style: italic;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 142px;
+  letter-spacing: -4px;
+  color: transparent;
+  -webkit-text-stroke: 3px var(--main-bg-color);
+  background-clip: text;
+}
+
+/* Pop-up */
+.popup_overlay {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  transition: opacity 0.3s ease;
+}
+
+.popup_container {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  max-width: 417px;
+  height: 589px;
+  border: 5px solid var(--main-text-color);
+  z-index: 10001;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.popup_header {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup_header > img {
+  max-height: 72.05px;
+}
+
+.popup_details {
+  display: flex;
+  justify-content: center;
+  padding-top: 1em;
+}
+
+/* Formulaire de contact */
+.wpcf7-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 225px;
+  margin-top: 1em;
+}
+
+.wpcf7-form p label,
+.wpcf7-submit {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.wpcf7-form p label span input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wpcf7-text,
+.wpcf7-email,
+.wpcf7-textarea {
+  border: 1px solid var(--input-border);
+  padding: 10px;
+  border-radius: 8px;
+  width: 225px;
+  margin: 2px auto;
+  align-self: center;
+}
+
+.wpcf7-submit {
+  width: 225px;
+  border-radius: 2px;
+  margin-top: 0.9em;
+  padding: 12px;
+  background-color: var(--button-color);
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  text-transform: none;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.wpcf7-submit:hover {
+  background-color: var(--main-text-color);
+  color: var(--main-bg-color);
 }
 
 /* Footer */

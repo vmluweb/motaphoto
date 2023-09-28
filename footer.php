@@ -8,6 +8,7 @@
         'menu_class' => 'bottom_menu',
 
     )); ?>
+
 </footer>
 
 </body>
