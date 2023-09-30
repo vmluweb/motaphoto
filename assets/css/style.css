@@ -186,7 +186,7 @@ li {
   transition: opacity 0.3s ease;
 }
 
-.popup_container {
+.modal {
   display: none;
   flex-direction: column;
   position: fixed;

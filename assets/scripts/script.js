@@ -1,18 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const contactMenu = document.querySelector(".menu-item-42");
-  const popup = document.querySelector(".popup_container");
-  const overlay = document.querySelector(".popup_overlay");
+jQuery(document).ready(function ($) {
+  console.log(".modal");
+  // Fonction pour afficher la modal
+  function openPopup() {
+    $(".modal").fadeIn();
+    $(".popup_overlay").fadeIn();
+  }
 
-  console.log(contactMenu);
-  contactMenu.addEventListener("click", () => {
-    overlay.style.display = "block";
-    popup.style.display = "flex";
+  // Fonction pour fermer la modal
+  function closePopup() {
+    $(".modal").fadeOut();
+    $(".popup_overlay").fadeOut();
+  }
+
+  // Lorsque vous cliquez sur le bouton #popup_link
+  $("#popup_link").click(function (e) {
+    e.preventDefault(); // Empêcher le comportement par défaut du lien
+    openPopup();
   });
 
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) {
-      overlay.style.display = "none";
-      popup.style.display = "none";
-    }
+  // Lorsque vous cliquez sur l'overlay
+  $(".popup_overlay").click(function () {
+    closePopup();
   });
 });
