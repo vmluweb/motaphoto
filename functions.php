@@ -50,3 +50,32 @@ function add_id_to_menu_item_42_link($atts, $item, $args)
     return $atts;
 }
 add_filter('nav_menu_link_attributes', 'add_id_to_menu_item_42_link', 10, 3);
+
+// Ajout d'un custom type personnalisé
+function catalogue_register_post_types()
+{
+
+    // CPT catalogue photo
+    $labels = array(
+        'name' => 'Photo',
+        'all_items' => 'Toutes les photos',
+        'singular_name' => 'Photo',
+        'add_new_item' => 'Ajouter une photo',
+        'edit_item' => 'Modifier la photo',
+        'menu_name' => 'Photo'
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'show_in_rest' => true,
+        'has_archive' => true,
+        'supports' => array('title', 'thumbnail'),
+        'menu_position' => 5,
+        'menu_icon' => 'dashicons-format-gallery',
+    );
+
+    register_post_type('photo', $args);
+}
+
+add_action('init', 'catalogue_register_post_types');

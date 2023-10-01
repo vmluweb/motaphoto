@@ -9,8 +9,6 @@
             // Insertion du formulaire de contact
             echo do_shortcode('[contact-form-7 id="fb3ee62" title="Formulaire de contact"]');
             ?>
-
-
         </div>
     </div>
 </div>

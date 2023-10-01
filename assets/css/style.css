@@ -255,7 +255,9 @@ li {
   align-self: center;
 }
 
-.wpcf7-submit {
+.wpcf7-submit,
+.btn_gallery,
+.btn_single {
   width: 225px;
   border-radius: 2px;
   margin-top: 0.9em;
@@ -266,11 +268,125 @@ li {
   text-transform: none;
   cursor: pointer;
   transition: all 200ms;
+  text-align: center;
 }
 
-.wpcf7-submit:hover {
+.wpcf7-submit:hover,
+.btn_gallery:hover {
   background-color: var(--main-text-color);
   color: var(--main-bg-color);
+}
+
+/* Portfolio gallery*/
+
+.homepage_gallery {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 3em;
+  align-items: center;
+}
+
+.homepage_gallery_grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 0 auto;
+  /* max-width: 1000px; */
+  padding-top: 6em;
+}
+
+.gallery_card {
+  position: relative;
+  padding: 0px;
+  cursor: pointer;
+  width: 564px;
+  height: 495px;
+}
+
+.gallery_card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery_card::before:hover {
+  opacity: 0.5;
+}
+
+.gallery_card .post__link {
+  position: relative;
+  height: 495px;
+  width: 564px;
+}
+
+.gallery_card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  white-space: 0;
+  overflow: hidden;
+}
+
+.btn_gallery {
+  margin-top: 3em;
+}
+
+/* Single */
+.post {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+  width: 100%;
+}
+
+.details_post_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  height: 100%;
+  width: 50%;
+  padding-left: 0.95em;
+}
+
+.details_post_description {
+  display: flex;
+  flex-direction: column;
+  max-width: 205px;
+}
+
+.details_post_description h1 {
+  font-size: 66px;
+  text-align: left;
+}
+
+.details_post_description ul {
+  padding-left: 0;
+}
+
+.details_post_description ul li,
+.details_post_description ul li a {
+  padding-left: 0;
+  font-family: "Space Mono", monospace;
+  font-size: 14px;
+  color: var(--main-text-color);
+  text-transform: uppercase;
+}
+.btn_single {
+  text-decoration: none;
+}
+
+.images_posts_column {
+  width: 50%;
+}
+.suggestion {
+  margin-top: 3em;
 }
 
 /* Footer */

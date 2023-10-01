@@ -11,6 +11,7 @@
                 </div>
             </div>
             <?php get_template_part('template-parts/popup'); ?>
+            <?php get_template_part('template-parts/gallery-photo'); ?>
         </main>
 <?php endwhile;
 endif; ?>
