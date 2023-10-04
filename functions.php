@@ -41,15 +41,15 @@ register_nav_menus(array(
 ));
 
 // Ajout d'un ID à l'élément #menu-item-42 > a
-function add_id_to_menu_item_42_link($atts, $item, $args)
+function add_class_to_menu_item_42_link($atts, $item, $args)
 {
 
     if ($item->ID == 42) {
-        $atts['id'] = 'popup_link';
+        $atts['class'] = 'popup_link';
     }
     return $atts;
 }
-add_filter('nav_menu_link_attributes', 'add_id_to_menu_item_42_link', 10, 3);
+add_filter('nav_menu_link_attributes', 'add_class_to_menu_item_42_link', 10, 3);
 
 // Ajout d'un custom type personnalisé
 function catalogue_register_post_types()

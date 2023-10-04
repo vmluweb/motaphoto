@@ -1,5 +1,5 @@
 <footer class="bottom">
-    <?php get_template_part('template-parts', 'popup'); ?>
+    <?php get_template_part('template-parts/popup'); ?>
     <?php wp_nav_menu(array(
         'theme_location' => 'footer',
         'container' => 'nav',
