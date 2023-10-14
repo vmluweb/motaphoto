@@ -11,7 +11,7 @@
                 </div>
             </div>
             <section class="homepage_gallery">
-                <?php get_template_part('template-parts/gallery-photo'); ?>
+                <?php get_template_part('template-parts/photo_block'); ?>
             </section>
     <?php endwhile;
     endif; ?>

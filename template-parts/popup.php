@@ -1,8 +1,8 @@
 <div class="popup_overlay">
     <div class="modal" id="popUp">
-        <div class="popup_header">
+        <figure class="popup_header">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/popup_header.png" alt="popup_header">
-        </div>
+        </figure>
 
         <div class="popup_details">
             <?php

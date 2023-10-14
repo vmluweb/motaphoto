@@ -24,7 +24,7 @@
         endwhile;
         wp_reset_postdata();
     else :
-    // Aucun projet trouvé.
+    // Aucun projet n'a été trouvé.
     endif;
     ?>
 </div>

@@ -1,5 +1,7 @@
 <footer class="bottom">
+    <div class="lightbox"></div>
     <?php get_template_part('template-parts/popup'); ?>
+
     <?php wp_nav_menu(array(
         'theme_location' => 'footer',
         'container' => 'nav',
