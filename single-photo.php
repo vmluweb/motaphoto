@@ -10,7 +10,6 @@
 				<div class="post_description">
 					<div class="post_description_text">
 
-
 						<h2><span><?php the_title(); ?></span></h2>
 						<p>Réf. photo : <?php the_field('reference'); ?></p>
 						<p>Catégorie : <?php the_terms(get_the_ID(), 'categorie', '', ', ', ''); ?></p>
@@ -71,17 +70,45 @@
 
 			</div>
 
-
 			<div class="single_gallery">
 				<h3>Vous aimerez aussi</h3>
-				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
-						<?php get_template_part('template-parts/photo_block'); ?>
 
 				<?php
-					endwhile;
-				endif;
+				$categories = get_the_terms(get_the_ID(), 'categorie'); // Récupération des catégories du post courant
+				if ($categories && count($categories) >= 1) {
+					$current_category = array_shift($categories);
+
+					$related_articles = new WP_Query([
+						'post_type' => 'photo',
+						'post_status' => 'publish',
+						'posts_per_page' => 2,
+						'paged' => 1,
+						'tax_query' => [
+							[
+								'taxonomy' => 'categorie',
+								'field' => 'id',
+								'terms' => $current_category->term_id,
+							],
+						],
+					]);
+				}
 				?>
+
+				<?php if ($related_articles->have_posts()) : ?>
+					<div class="gallery_grid" id="gallery_grid_single">
+					<?php while ($related_articles->have_posts()) :
+						$related_articles->the_post();
+						// Affichage du contenu des publications similaires
+						get_template_part('template-parts/photo_block');
+					endwhile;
+					// Réinitialisation de la requête
+					wp_reset_postdata();
+				endif;
+					?>
+					</div>
+					<!-- Affichage du bouton "Charger plus" -->
+
+					<a href="#" class="btn btn_gallery " id="load-more">Charger plus</a>
 			</div>
 		</article>
 	</section>

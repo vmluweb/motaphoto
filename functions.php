@@ -46,6 +46,7 @@ register_nav_menus(array(
 ));
 
 // Ajout d'un ID à l'élément #menu-item-42 > a
+add_filter('nav_menu_link_attributes', 'add_class_to_menu_item_42_link', 10, 3);
 function add_class_to_menu_item_42_link($atts, $item, $args)
 {
 
@@ -54,6 +55,6 @@ function add_class_to_menu_item_42_link($atts, $item, $args)
     }
     return $atts;
 }
-add_filter('nav_menu_link_attributes', 'add_class_to_menu_item_42_link', 10, 3);
+
 
 require_once get_template_directory() . '/inc/custom-navigation.php';
