@@ -9,11 +9,11 @@ jQuery(document).ready(function ($) {
     $(this).siblings().removeClass("selectedOption");
     $(this).addClass("selectedOption");
 
-    let currentele = $(this).html();
+    let currentElement = $(this).html();
     $(this)
       .closest(".select_container")
       .find(".placeholder_option li")
-      .html(currentele);
+      .html(currentElement);
     $(this).closest(".select_container").removeClass("active");
   });
 });
