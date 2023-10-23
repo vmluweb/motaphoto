@@ -1,5 +1,66 @@
 jQuery(document).ready(function ($) {
-  //SINGLE-PHOTO: Affichage de la featured image au survol des flèches de navigation
+  // FRONT-PAGE
+  let selectedCategory = null;
+  let selectedFormat = null;
+  let selectedYear = null;
+  let currentPage = 1;
+
+  // Filtrage des photos avec AJAX
+  $(".option_items").on("click", function () {
+    let $this = $(this);
+    let value = $this.data("value");
+    let $ul = $this.closest("ul");
+
+    // Mise à jour de la sélection en fonction de la liste
+    if ($ul.is("#category_filter .options_items_list")) {
+      selectedCategory = value;
+    } else if ($ul.is("#format_filter .options_items_list")) {
+      selectedFormat = value;
+    } else if ($ul.is("#year-filter .options_items_list")) {
+      selectedYear = value;
+    }
+
+    $(".option_items").removeClass("selected");
+    $this.addClass("selected");
+
+    // Requête AJAX avec les sélections
+    let data = {
+      action: "filter_photos",
+      categorie: selectedCategory,
+      format: selectedFormat,
+      year: selectedYear,
+    };
+
+    $.post(myAjax.ajaxurl, data, function (response) {
+      $("#gallery_grid_homepage").html(response);
+    });
+  });
+
+  // Chargement de publications supplémentaires à partir d'un bouton #load-more avec AJAX
+  $("#load-more").on("click", function () {
+    currentPage++;
+
+    $.ajax({
+      type: "POST",
+      url: myAjax.ajaxurl,
+      dataType: "json",
+      data: {
+        action: "load_more_post",
+        paged: currentPage,
+        categorie: selectedCategory,
+        format: selectedFormat,
+        year: selectedYear,
+      },
+      success: function (res) {
+        if (currentPage >= res.max) {
+          $("#load-more").hide();
+        }
+        $("#gallery_grid_homepage").append(res.html);
+      },
+    });
+  });
+
+  //SINGLE-PHOTO: Affichage de l'image de couverture des publications au survol des flèches de navigation
   $(".post-thumbnail").hide();
   $(".prev").hover(
     function () {
@@ -23,29 +84,4 @@ jQuery(document).ready(function ($) {
       $(".post-thumbnail").hide();
     }
   );
-
-  // SINGLE-PHOTO: Chargement des publications similaires à partir d'un gestionnaire d'événements au clic
-
-  let currentPage = 1;
-  $("#load-more").on("click", function () {
-    currentPage++;
-
-    let currentCategory = myAjax.currentCategory;
-    let postID = myAjax.postID;
-
-    $.ajax({
-      type: "POST",
-      url: myAjax.ajaxurl,
-      dataType: "html",
-      data: {
-        action: "load_more_post_single",
-        paged: currentPage,
-        post_id: postID,
-        current_category: currentCategory,
-      },
-      success: function (res) {
-        $("#gallery_grid_single").append(res);
-      },
-    });
-  });
 });

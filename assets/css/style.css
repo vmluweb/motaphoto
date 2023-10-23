@@ -1,3 +1,4 @@
+@import url(./media-queries.css);
 @font-face {
   font-family: "Poppins";
   src: url("./assets/fonts/poppins/Poppins-Light.ttf") format("ttf");
@@ -18,11 +19,12 @@
   --button-color: #d8d8d8;
   --overlay-page: #00000060;
   --input-border: #b8bbc2;
+  --selected_item: #e00000;
+  --hover_items: #ffd6d6;
 }
 
 * {
   box-sizing: border-box;
-  /* margin: 0 auto; */
 }
 
 .admin-bar .top {
@@ -143,29 +145,32 @@ figure {
   cursor: pointer;
 }
 
-/* Bannière page d'accueil */
+/* Bannière */
 .banner {
   width: 100%;
-  height: 962px;
+  max-height: 962px;
   display: flex;
   position: relative;
-  background-color: var(--main-color);
   z-index: 727;
 }
 
 .banner_image {
+  width: 100%;
   position: relative;
   display: flex;
   overflow: hidden;
 }
 
 .banner img {
-  height: 100%;
+  width: 100%;
+  height: 96vh;
+  object-fit: cover;
+  object-position: center;
 }
 
 .banner_text {
   position: absolute;
-  top: 50%;
+  top: 74%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 729;
@@ -173,7 +178,7 @@ figure {
 }
 
 .banner_text p {
-  font-size: 5.96rem;
+  font-size: 5.46rem;
   font-style: italic;
   font-weight: 700;
   text-transform: uppercase;
@@ -204,7 +209,7 @@ figure {
   top: 53%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: var(--main-bg-color);
   max-width: 417px;
   height: 589px;
   border: 5px solid var(--main-text-color);
@@ -303,6 +308,7 @@ figure {
 
 .homepage_gallery {
   padding-top: 6em;
+  margin: 0 7em;
 }
 
 .gallery_grid {
@@ -311,6 +317,10 @@ figure {
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   margin: 0 auto;
+}
+
+#gallery_grid_homepage {
+  margin-top: 2em;
 }
 
 .gallery_card {
@@ -358,8 +368,116 @@ figure {
   margin-top: 3em auto;
 }
 
-/* Single */
+/* Page d'accueil */
+.filtering_sorting_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 729;
+}
 
+.filters_category_format {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  gap: 15px;
+}
+
+.sorting {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 50%;
+}
+
+.select_container {
+  width: 50%;
+  position: relative;
+  user-select: none;
+}
+
+.select_container .placeholder_option {
+  background: var(--main-bg-color);
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid var(--main-text-color);
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1.25px;
+  padding: 0;
+}
+
+.select_container .placeholder_option li {
+  padding: 10px 20px;
+}
+
+.select_container .placeholder_option:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  width: 6px;
+  height: 6px;
+  border: 2px solid;
+  border-color: transparent transparent #555555 #555555;
+  margin: 0 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.select_container .options_items_list {
+  width: 100%;
+  position: absolute;
+  top: 55px;
+  left: 0;
+  width: 100%;
+  background: var(--main-bg-color);
+  border-radius: 8px;
+  display: none;
+}
+
+.select_container .options_items_list li {
+  font-family: "Poppins", sans-serif;
+  text-transform: capitalize;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.select_container .options_items_list li:hover {
+  background: var(--hover_items);
+  color: var(--main-text-color);
+}
+
+.select_container .options_items_list li:active {
+  background: var(--selected_item);
+  color: var(--main-bg-color);
+}
+
+.select_container .option_items,
+.select_container .option {
+  display: flex;
+  align-items: center;
+}
+
+.select_container.active .options_items_list {
+  padding: 0;
+  display: block;
+}
+
+.select_container .option_items.selectedOption {
+  background: var(--selected_item);
+  color: var(--main-bg-color);
+}
+
+.select_container.active .placeholder_option:before {
+  top: 50%;
+  transform: rotate(-225deg);
+}
+
+/* Page de publication */
 .post {
   display: flex;
   justify-content: center;

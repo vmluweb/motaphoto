@@ -108,7 +108,7 @@
 					</div>
 					<!-- Affichage du bouton "Charger plus" -->
 
-					<a href="#" class="btn btn_gallery " id="load-more">Charger plus</a>
+					<a href="<?php echo home_url('/'); ?>" class="btn btn_gallery">Toutes les photos</a>
 			</div>
 		</article>
 	</section>

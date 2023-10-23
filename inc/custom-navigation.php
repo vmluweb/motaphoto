@@ -62,42 +62,128 @@ function add_ajax_object()
     ));
 }
 
-add_action('wp_ajax_load_more_post_single', 'load_more_post_single');
-add_action('wp_ajax_nopriv_load_more_post_single', 'load_more_post_single');
-
-function load_more_post_single()
+add_action('wp_ajax_load_more_post', 'load_more_post');
+add_action('wp_ajax_nopriv_load_more_post', 'load_more_post');
+function load_more_post()
 {
-    $response = '';
+    $selectedCategory = $_POST['categorie'];
+    $selectedFormat = $_POST['format'];
+    $selectedYear = $_POST['year'];
+    $paged = $_POST['paged'];
 
-    $post_id = $_POST['post_id'];
-    $current_categories = get_the_terms($post_id, 'categorie');
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 12,
+        'paged' => $paged,
+    );
 
-    if ($current_categories && count($current_categories) > 0) {
-        $category_slugs = array(); // Création d'un tableau pour stocker les slugs des catégories
-        foreach ($current_categories as $category) {
-            $category_slugs[] = $category->slug; // Ajout des slugs des catégories au tableau
+    if (!empty($selectedCategory) || !empty($selectedFormat) || !empty($selectedYear)) {
+        $args['tax_query'] = array('relation' => 'AND');
+
+        if (!empty($selectedCategory)) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'categorie',
+                'field' => 'id',
+                'terms' => $selectedCategory,
+                'operator' => 'IN',
+            );
         }
 
-        $ajaxposts = new WP_Query([
-            'post_type' => 'photo',
-            'posts_per_page' => 2,
-            'paged' => $_POST['paged'],
-            'tax_query' => [
-                [
-                    'taxonomy' => 'categorie',
-                    'field' => 'slug',
-                    'terms' => $category_slugs, // Utilisation des slugs des catégories de la publication courante
-                ],
-            ],
-        ]);
+        if (!empty($selectedFormat)) {
+            $args['tax_query'][] = array(
+                'taxonomy' => 'format',
+                'field' => 'id',
+                'terms' => $selectedFormat,
+                'operator' => 'IN',
+            );
+        }
 
-        if ($ajaxposts->have_posts()) {
-            while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
-                $response .= get_template_part('template-parts/photo_block', '', false);
-            endwhile;
+        if (!empty($selectedYear)) {
+            $args['date_query'] = array(
+                array(
+                    'year' => $selectedYear,
+                ),
+            );
         }
     }
 
-    echo $response;
+    $ajaxposts = new WP_Query($args);
+
+    $response = '';
+    $max_pages = $ajaxposts->max_num_pages;
+
+    if ($ajaxposts->have_posts()) {
+        ob_start();
+        while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+            $response .= get_template_part('template-parts/photo_block', '', false);
+        endwhile;
+        $output = ob_get_contents();
+        ob_end_clean();
+    } else {
+        $response = '';
+    }
+
+    $result = [
+        'max' => $max_pages,
+        'html' => $output,
+    ];
+
+    wp_reset_postdata(); // Réinitialisation de la requête
+
+    echo json_encode($result);
     exit;
+}
+
+// Filtrage des publications
+add_action('wp_ajax_filter_photos', 'filter_photos');
+add_action('wp_ajax_nopriv_filter_photos', 'filter_photos');
+function filter_photos()
+{
+    $categorie = $_POST['categorie'];
+    $format = $_POST['format'];
+    $year = $_POST['year'];
+
+    $relation = 'AND';
+
+    if (empty($categorie) || empty($format)) {
+        $relation = 'OR';
+    }
+
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 12,
+        'tax_query' => array(
+            'relation' => $relation,
+            array(
+                'taxonomy' => 'categorie',
+                'field' => 'id',
+                'terms' => $categorie,
+                'operator' => 'IN',
+            ),
+            array(
+                'taxonomy' => 'format',
+                'field' => 'id',
+                'terms' => $format,
+                'operator' => 'IN',
+            ),
+        ),
+    );
+
+    if ($year) {
+        $args['year'] = $year;
+    }
+
+    $photo_query = new WP_Query($args);
+
+    if ($photo_query->have_posts()) :
+        while ($photo_query->have_posts()) : $photo_query->the_post();
+            get_template_part('template-parts/photo_block');
+        endwhile;
+        wp_reset_postdata();
+    else :
+        echo "Aucun résultat trouvé pour cette sélection";
+
+    endif;
+
+    die();
 }
