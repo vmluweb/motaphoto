@@ -16,6 +16,7 @@ function motaphoto_register_assets()
         array(),
         '1.0'
     );
+
     wp_enqueue_style('css-fancybox', 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', array('jquery'), '3.5.7');
 }
 

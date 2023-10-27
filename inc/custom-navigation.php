@@ -143,41 +143,47 @@ function filter_photos()
     $format = $_POST['format'];
     $year = $_POST['year'];
 
-    $relation = 'AND';
-
-    if (empty($categorie) || empty($format)) {
-        $relation = 'OR';
-    }
-
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => 12,
-        'tax_query' => array(
-            'relation' => $relation,
-            array(
-                'taxonomy' => 'categorie',
-                'field' => 'id',
-                'terms' => $categorie,
-                'operator' => 'IN',
-            ),
-            array(
-                'taxonomy' => 'format',
-                'field' => 'id',
-                'terms' => $format,
-                'operator' => 'IN',
-            ),
-        ),
     );
+
+    $tax_query = array();
+
+    if (!empty($categorie) && !empty($format) &&  !empty($year)) {
+        $tax_query['relation'] = 'AND';
+    }
+
+    if (!empty($categorie)) {
+        $tax_query[] = array(
+            'taxonomy' => 'categorie',
+            'field' => 'id',
+            'terms' => $categorie,
+            'operator' => 'IN',
+        );
+    }
+    if (!empty($format)) {
+        $tax_query[] = array(
+            'taxonomy' => 'format',
+            'field' => 'id',
+            'terms' => $format,
+            'operator' => 'IN',
+        );
+    }
 
     if ($year) {
         $args['year'] = $year;
+    }
+
+    if (!empty($tax_query)) {
+        $args['tax_query'] = $tax_query;
     }
 
     $photo_query = new WP_Query($args);
 
     if ($photo_query->have_posts()) :
         while ($photo_query->have_posts()) : $photo_query->the_post();
-            get_template_part('template-parts/photo_block');
+            get_template_part('template-parts/photo-block');
         endwhile;
         wp_reset_postdata();
     else :

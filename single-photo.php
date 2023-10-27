@@ -53,7 +53,6 @@
 								previous_post_link('<div class="prev" data-thumbnail-url="' . esc_url($prevThumbnailURL) . '">%link</div>', '');
 							endif;
 
-
 							$next_post = get_next_post();
 							if ($next_post) :
 								$next_post_id = $next_post->ID;
@@ -99,14 +98,14 @@
 					<?php while ($related_articles->have_posts()) :
 						$related_articles->the_post();
 						// Affichage du contenu des publications similaires
-						get_template_part('template-parts/photo_block');
+						get_template_part('template-parts/photo-block');
 					endwhile;
 					// Réinitialisation de la requête
 					wp_reset_postdata();
 				endif;
 					?>
 					</div>
-					<!-- Affichage du bouton "Charger plus" -->
+					<!-- Retour à l'accueil -->
 
 					<a href="<?php echo home_url('/'); ?>" class="btn btn_gallery">Toutes les photos</a>
 			</div>

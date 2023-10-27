@@ -44,10 +44,10 @@
                 if (!empty($terms)) {
                     echo '<div class="select_container" id="category_filter">';
                     echo '<ul class="placeholder_option">';
-                    echo '<li>' . esc_html($taxonomy_name) . '</li>';
+                    echo '<li data-default-text="Catégories">' . esc_html($taxonomy_name) . '</li>';
                     echo '</ul>';
                     echo '<ul class="options_items_list" data-target="category_filter">';
-                    echo '<li class="option"></li>';
+                    echo '<li class="option option_items reset_option" data-value=""></li>';
                     foreach ($terms as $term) {
                         echo '<li class="option_items" data-value="' . esc_attr($term->term_id) . '">' . esc_html($term->name) . '</li>';
                     }
@@ -69,10 +69,10 @@
                 if (!empty($terms)) {
                     echo '<div class="select_container" id="format_filter">';
                     echo '<ul class="placeholder_option">';
-                    echo '<li>' . esc_html($taxonomy_name) . '</li>';
+                    echo '<li data-default-text="Formats">' . esc_html($taxonomy_name) . '</li>';
                     echo '</ul>';
                     echo '<ul class="options_items_list" data-target="format_filter">';
-                    echo '<li class="option"></li>';
+                    echo '<li class="option option_items reset_option" data-value=""></li>';
                     foreach ($terms as $term) {
                         echo '<li class="option_items" data-value="' . esc_attr($term->term_id) . '">' . esc_html($term->name) . '</li>';
                     }
@@ -82,12 +82,13 @@
                 ?>
             </div>
             <div class="sorting">
-                <div class="select_container" id="year-filter">
+                <div class="select_container" id="year_filter">
                     <ul class="placeholder_option">
-                        <li>Trier par</li>
+
+                        <li data-default-text="Trier par">Trier par</li>
                     </ul>
-                    <ul class="options_items_list" data-target="year-filter">
-                        <li class="option" data-value=""></li>
+                    <ul class="options_items_list" data-target="year_filter">
+                        <li class="option option_items reset_option" data-value=""></li>
                         <?php
                         global $wpdb;
                         $years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_type = 'photo' AND post_status = 'publish' ORDER BY post_date DESC");
@@ -99,7 +100,6 @@
                     </ul>
                 </div>
             </div>
-            <!--  -->
         </div>
         <div class="gallery_grid" id="gallery_grid_homepage">
 
@@ -114,11 +114,9 @@
 
             if ($photo_query->have_posts()) :
                 while ($photo_query->have_posts()) : $photo_query->the_post();
-            ?>
 
-                    <?php get_template_part('template-parts/photo_block'); ?>
+                    get_template_part('template-parts/photo-block');
 
-            <?php
                 endwhile;
                 wp_reset_postdata();
             else :
