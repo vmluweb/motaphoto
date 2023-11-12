@@ -5,15 +5,15 @@
     "active": true,
     "taxonomy": "categorie",
     "object_type": [
-        "photo"
+        "photos"
     ],
-    "advanced_configuration": 0,
+    "advanced_configuration": 1,
     "import_source": "",
     "import_date": "",
     "labels": {
         "name": "Catégories",
         "singular_name": "Catégorie",
-        "menu_name": "Catégorie",
+        "menu_name": "Catégories",
         "all_items": "All Catégorie",
         "edit_item": "Modifier Catégorie",
         "view_item": "Voir Catégorie",
@@ -24,8 +24,8 @@
         "parent_item_colon": "Catégorie parent :",
         "search_items": "Search Catégorie",
         "most_used": "",
-        "not_found": "No catégorie found",
-        "no_terms": "Aucun catégorie",
+        "not_found": "Aucune catégorie trouvée",
+        "no_terms": "Aucune catégorie",
         "name_field_description": "",
         "slug_field_description": "",
         "parent_field_description": "",
@@ -71,5 +71,5 @@
     "meta_box": "default",
     "meta_box_cb": "",
     "meta_box_sanitize_cb": "",
-    "modified": 1698223744
+    "modified": 1699026966
 }

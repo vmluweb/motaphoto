@@ -1,12 +1,20 @@
+// SOMMAIRE
+////////////////////////////////////////////////////////////////////
+// 01_Gestion du clic sur une liste déroulante personnalisée
+// 02_Gestion de la sélection d'une option dans une liste déroulante
+// 03_Gestion du clic en dehors des listes déroulantes pour désactiver l'état actif
+////////////////////////////////////////////////////////////////////
+
 jQuery(document).ready(function ($) {
-  // Gestion de l'ouverture et de la fermeture d'une liste
+  // Front-page
+  // 01_Gestion du clic sur une liste déroulante personnalisée
   $(".placeholder_option").click(function (event) {
     $(this).parent().toggleClass("active");
 
     event.stopPropagation();
   });
 
-  // Gestion d'une sélection dans une liste
+  // 02_Gestion de la sélection d'une option dans une liste déroulante
   $(".options_items_list li").click(function (event) {
     let $this = $(this);
     let value = $this.data("value");
@@ -46,6 +54,7 @@ jQuery(document).ready(function ($) {
     event.stopPropagation();
   });
 
+  // 03_Gestion du clic en dehors des listes déroulantes pour désactiver l'état actif
   $(document).click(function () {
     $(".select_container").removeClass("active");
   });

@@ -1,6 +1,23 @@
-@import url(./media-queries.css);
+/* SOMMAIRE */
+/**************************************************************/
+/* 01_Configuration générale du style */
+/* 02_Header */
+/* 03_Bannière */
+/* 04_Pop-up */
+/* 05_Personnalisation du formulaire de contact Contact Form 7*/
+/* 06_Galeries d'images*/
+/* 07_Effet de superposition au survol d'une image à partir d'une galerie d'images */
+/* 08_Personnalisation de la fenêtre lightbox Fancybox */
+/* 09_Listes déroulantes pour le filtrage des images */
+/* 10_Publication personnalisée sur une single-custom.php */
+/* 11_Navigation entre les publications personnalisées */
+/* 12_Footer */
+/**************************************************************/
+
+/* 01_Configuration générale du style */
 @font-face {
   font-family: "Poppins";
+  src: url("./assets/fonts/poppins/Poppins-Light.ttf") format("ttf");
   src: url("./assets/fonts/poppins/Poppins-Light.ttf") format("ttf");
 }
 
@@ -85,54 +102,63 @@ figure {
   padding: 0;
 }
 
-.top {
+/* 02_Header */
+.site-header {
   position: sticky;
+  display: grid;
   width: 100%;
   height: 80px;
-  top: 0px;
-  display: flex;
-  justify-content: space-between;
+  top: 0;
   background-color: var(--main-bg-color);
-  z-index: 9999;
   align-items: center;
-  padding: 0 4em 0 4em;
+  padding: 0 5vw 0 5vw;
+  z-index: 999;
   box-shadow: 0 0 6px 0 var(--black-shadow);
 }
 
-.top_logo {
+.site-header .main-navigation {
   display: flex;
-  width: 50%;
-  text-align: center;
+  align-items: center;
+  overflow: hidden;
 }
 
-.top a > img {
-  max-width: 48.5%;
+.site-header .main-navigation .site-title {
+  width: 100%;
+  z-index: 1000;
+}
+
+.site-header .main-navigation .site-title a {
+  padding-left: 3rem;
+}
+
+.site-header .main-navigation .burgerMenu {
+  display: none;
+}
+
+.top_logo a > img {
+  max-width: 13rem;
   height: auto;
 }
 
-.top_menu_container {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
+.site-header .main-navigation .burgerMenu #icons {
+  display: none;
 }
 
-.top_menu {
-  width: 65%;
+.site-header .main-navigation .menu-navigation ul {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  color: var(--main-bg-color);
-  padding-left: 0;
+  width: 100%;
 }
 
-.top_menu a,
-.bottom_menu a {
+.site-header .main-navigation .menu-navigation li a {
   font-size: 1rem;
   color: var(--main-text-color);
   text-transform: uppercase;
   font-weight: 400;
   text-align: center;
   text-decoration: none;
+  text-wrap: nowrap;
+  padding-right: 2rem;
   transition: all 200ms;
 }
 
@@ -145,13 +171,16 @@ figure {
   cursor: pointer;
 }
 
-/* Bannière */
+/* 03_Bannière */
 .banner {
   width: 100%;
   max-height: 962px;
   display: flex;
   position: relative;
   z-index: 727;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .banner_image {
@@ -170,11 +199,10 @@ figure {
 
 .banner_text {
   position: absolute;
-  top: 74%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 40%;
   z-index: 729;
-  white-space: nowrap;
+  text-align: center;
+  width: 100%;
 }
 
 .banner_text p {
@@ -183,13 +211,16 @@ figure {
   font-weight: 700;
   text-transform: uppercase;
   line-height: 142px;
-  letter-spacing: -4px;
+  letter-spacing: 1px;
   color: transparent;
   -webkit-text-stroke: 3px var(--main-bg-color);
   background-clip: text;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
 }
 
-/* Pop-up */
+/* 04_Pop-up */
 .popup_overlay {
   display: none;
   position: fixed;
@@ -236,7 +267,7 @@ figure {
   padding-top: 1em;
 }
 
-/* Formulaire de contact */
+/* 05_Personnalisation du formulaire de contact Contact Form 7*/
 .wpcf7-form {
   display: flex;
   flex-direction: column;
@@ -279,10 +310,10 @@ figure {
   width: 225px;
   border-radius: 2px;
   margin-top: 0.9em;
-  padding: 12px;
+  padding: 0.75rem;
   background-color: var(--button-color);
   font-family: "Space Mono", monospace;
-  font-size: 12px;
+  font-size: 0.75rem;
   text-transform: none;
   cursor: pointer;
   transition: all 200ms;
@@ -294,9 +325,10 @@ figure {
 .btn:hover {
   background-color: var(--main-text-color);
   color: var(--main-bg-color);
+  font-weight: 700;
 }
 
-/* Photo gallery*/
+/* 06_Galeries d'images*/
 .homepage_gallery,
 .single_gallery {
   display: flex;
@@ -308,15 +340,32 @@ figure {
 
 .homepage_gallery {
   padding-top: 6em;
-  margin: 0 7em;
+  max-width: 1150px;
+  margin: 0 8vw;
+}
+
+.single_gallery {
+  padding: 0;
+  align-items: unset;
+  text-align: left;
+}
+
+.single_gallery h3 {
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 2em 0 1em 0;
+}
+
+.single_gallery > .gallery_grid {
+  margin: 0;
 }
 
 .gallery_grid {
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin: 0 auto;
+  gap: 1rem;
 }
 
 #gallery_grid_homepage {
@@ -325,16 +374,10 @@ figure {
 
 .gallery_card,
 .overlay_post {
-  position: relative;
   padding: 0px;
   cursor: pointer;
-  width: 564px;
-  height: 495px;
-}
-
-.single_gallery .gallery_card {
+  height: 64.45vh;
   width: 100%;
-  height: 495px;
 }
 
 .gallery_card {
@@ -342,13 +385,21 @@ figure {
 }
 
 .gallery_image {
-  height: 495px;
-  width: 564px;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
   object-position: center;
   overflow: hidden;
 }
 
+.fail_filters {
+  font-family: "Poppins", sans-serif;
+  transform: translate(50%, 0);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* 07_Effet de superposition au survol d'une image à partir d'une galerie d'images */
 .overlay_post {
   position: absolute;
   top: 0;
@@ -377,7 +428,7 @@ figure {
 }
 
 .overlay_post_header > a img {
-  max-width: 48px;
+  max-width: 34px;
 }
 
 .overlay_post_main {
@@ -387,7 +438,7 @@ figure {
   height: 100%;
 }
 
-.post__link img {
+.post_link img {
   width: 78px;
   padding-left: 20px;
 }
@@ -400,17 +451,104 @@ figure {
 }
 
 .overlay_post_footer p {
+  font-size: 14px;
   color: #fff;
   text-transform: uppercase;
   margin: 0;
   padding: 5px;
 }
 
-.btn_gallery {
-  margin-top: 3em auto;
+.ref_lightbox {
+  font-family: "Poppins", sans-serif;
 }
 
-/* Page d'accueil */
+.cat_lightbox {
+  font-family: "Space Mono", monospace;
+  letter-spacing: 1.25px;
+}
+
+.btn_gallery {
+  margin: 0 auto;
+  margin-top: 4em;
+  align-self: center;
+}
+
+/* 08_Personnalisation de la fenêtre lightbox Fancybox */
+.fancybox-button {
+  background: 0;
+}
+
+.fancybox-button--close {
+  color: var(--main-bg-color);
+  width: 66px;
+  height: 66px;
+}
+
+.fancybox-button--arrowLeft {
+  left: 20%;
+}
+
+.fancybox-button--arrowRight {
+  right: 20%;
+}
+
+.fancybox-button--arrowLeft::before,
+.fancybox-button--arrowRight::before {
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 20px;
+}
+
+.fancybox-button--arrowLeft::before {
+  background-image: url("../images/left_mobile.png");
+}
+
+.fancybox-button--arrowRight::before {
+  background-image: url("../images/right_mobile.png");
+}
+
+.fancybox-button--arrowRight:hover,
+.fancybox-button--arrowLeft:hover {
+  transform: scaleX(1.2);
+  transition: transform 0.3s;
+}
+
+.fancybox-button--arrowLeft,
+.fancybox-button--arrowRight {
+  position: relative;
+}
+
+.fancybox-button--arrowLeft {
+  left: 0;
+}
+
+.fancybox-button--arrowRight {
+  right: 0;
+}
+
+.fancybox-button--arrowLeft span,
+.fancybox-button--arrowRight span {
+  position: absolute;
+  top: 13%;
+  font-family: "Space Mono", monospace;
+  font-size: 0.75rem;
+  color: var(--main-bg-color);
+  transition: font-weight 0.3s;
+}
+
+.fancybox-button--arrowRight span {
+  right: 100%;
+}
+
+.fancybox-button--arrowLeft span:hover,
+.fancybox-button--arrowRight span:hover {
+  font-weight: 600;
+}
+
+/* 09_Listes déroulantes pour le filtrage des images */
 .filtering_sorting_container {
   width: 100%;
   display: flex;
@@ -422,21 +560,25 @@ figure {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 50%;
-  gap: 15px;
+  width: 35.5rem;
+  gap: 2rem;
 }
 
 .sorting {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 50%;
+  width: 25%;
 }
 
 .select_container {
-  width: 50%;
+  width: 50vw;
   position: relative;
   user-select: none;
+}
+
+#year-filter {
+  width: 25rem;
 }
 
 .select_container .placeholder_option {
@@ -446,15 +588,18 @@ figure {
   display: flex;
   align-items: center;
   cursor: pointer;
-  border: 1px solid var(--main-text-color);
+  border: 1px solid var(--input-border);
   font-family: "Poppins", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1.25px;
-  padding: 0;
+  text-wrap: nowrap;
+  letter-spacing: 0.3px;
+  padding: 0.25rem;
 }
 
 .select_container .placeholder_option li {
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
 }
 
 .select_container .placeholder_option:before {
@@ -483,9 +628,15 @@ figure {
 
 .select_container .options_items_list li {
   font-family: "Poppins", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 1.25px;
   text-transform: capitalize;
   padding: 10px 20px;
   cursor: pointer;
+}
+
+.select_container .options_items_list .option {
+  padding: 16px 20px;
 }
 
 .select_container .options_items_list li:hover {
@@ -519,12 +670,12 @@ figure {
   transform: rotate(-225deg);
 }
 
-/* Page de publication */
+/* 10_Publication personnalisée sur une single-custom */
 .post {
   display: flex;
   justify-content: center;
   margin: 3em auto;
-  width: 1000px;
+  max-width: 1000px;
 }
 
 .post_container {
@@ -532,15 +683,21 @@ figure {
   flex-direction: column;
 }
 
-.post_description {
+.post_info_description_wrapper {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.post_description td {
+  padding-left: 10px;
 }
 
 .post_description_text {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.post_description_text {
+  vertical-align: bottom;
   text-align: left;
   text-transform: uppercase;
   border-bottom: 1px solid var(--main-text-color);
@@ -548,7 +705,10 @@ figure {
 }
 
 .post_description_text h2 span {
-  font-size: 66px;
+  font-family: "Space Mono", monospace;
+  font-size: 4.125rem;
+  font-weight: 400;
+  font-style: italic;
   line-height: 58px;
   width: 25vw;
   margin-bottom: 0;
@@ -568,32 +728,29 @@ figure {
   padding-bottom: 1.025rem;
 }
 
-.post_description_img {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.post_description_img img {
+.post_description_img > img {
+  width: 100%;
+  height: auto;
   object-fit: contain;
   object-position: center;
+  vertical-align: bottom;
 }
 
-.post_info {
-  display: flex;
-
-  align-items: flex-end;
-  border-bottom: 1px solid var(--main-text-color);
-  padding: 1em 0 2em 0;
+tr.post_info td {
+  padding: 0.5em 0 1em 0;
   overflow: hidden;
+}
+
+tbody {
+  border-bottom: 1px solid var(--main-text-color);
 }
 
 .post_info_cta {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 50%;
-  padding-right: 2em;
+  align-items: flex-end;
+  height: 100%;
+  padding-top: 1.5em;
 }
 
 .post_info_cta p {
@@ -606,19 +763,25 @@ figure {
 
 .btn_post_info {
   margin-top: 0;
+  margin-left: 2em;
 }
 
+/* 11_Navigation entre les publications personnalisées */
 .post_info_carousel_container {
-  display: flex;
-  justify-content: flex-end;
   width: 50%;
   position: relative;
   height: auto;
 }
 
+tr.post_info td.post_info_carousel_container {
+  margin-left: auto;
+}
+
 .post_info_carousel {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: end;
 }
 
 .preview_thumbnail {
@@ -668,24 +831,7 @@ figure {
   height: 8px;
 }
 
-.single_gallery {
-  padding: 0;
-  align-items: unset;
-  text-align: left;
-}
-
-.single_gallery h3 {
-  font-size: 18px;
-  font-weight: 400;
-  text-transform: uppercase;
-  padding: 2em 0 1em 0;
-}
-
-.btn_gallery {
-  align-self: center;
-}
-
-/* Footer */
+/* 12_Footer */
 .bottom {
   width: 100%;
   height: 40px;
@@ -707,6 +853,7 @@ figure {
   width: 100%;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 .bottom_menu li {
@@ -714,3 +861,15 @@ figure {
   text-wrap: nowrap;
   padding-right: 1em;
 }
+
+.bottom_menu a {
+  font-size: 1rem;
+  color: var(--main-text-color);
+  text-transform: uppercase;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  transition: all 200ms;
+}
+
+@import url(./media-queries.css);

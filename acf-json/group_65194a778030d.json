@@ -28,7 +28,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "photo"
+                "value": "photos"
             }
         ]
     ],
@@ -41,5 +41,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1698223629
+    "modified": 1699019564
 }

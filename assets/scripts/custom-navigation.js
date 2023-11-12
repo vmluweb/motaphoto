@@ -1,5 +1,21 @@
+// SOMMAIRE
+////////////////////////////////////////////////////////////////////
+// 01_Gestion du menu burger
+// 02_Gestion du filtrage des photos avec AJAX
+// 03_Chargement dynamique des publications supplémentaires au clic sur le bouton "Charger plus"
+// 04_Gestion de l'affichage des miniatures au survol des flèches de navigation précédente et suivante
+////////////////////////////////////////////////////////////////////
+
 jQuery(document).ready(function ($) {
-  // FRONT-PAGE
+  // 01_Gestion du menu burger
+  const icons = document.querySelector("#icons");
+  const navbar = document.querySelector(".main-navigation");
+
+  icons.addEventListener("click", () => {
+    navbar.classList.toggle("active");
+  });
+
+  // 02_Gestion du filtrage des publications avec AJAX
   let selectedCategory = null;
   let selectedFormat = null;
   let selectedYear = null;
@@ -31,12 +47,13 @@ jQuery(document).ready(function ($) {
       year: selectedYear,
     };
 
+    // Mise à jour dynamique de la galerie avec la réponse AJAX
     $.post(myAjax.ajaxurl, data, function (response) {
       $("#gallery_grid_homepage").html(response);
     });
   });
 
-  // Chargement de publications supplémentaires à partir d'un bouton #load-more avec AJAX
+  // 03_Chargement dynamique des publications supplémentaires au clic sur le bouton "Charger plus"
   $("#load-more").on("click", function () {
     currentPage++;
 
@@ -60,8 +77,9 @@ jQuery(document).ready(function ($) {
     });
   });
 
-  //SINGLE-PHOTO: Affichage de l'image de couverture des publications au survol des flèches de navigation
+  // Single-photos
   $(".post-thumbnail").hide();
+  // 04_Gestion de l'affichage des miniatures au survol des flèches de navigation précédente et suivante
   $(".prev").hover(
     function () {
       $prevThumbnailURL = $(this).data("thumbnail-url");

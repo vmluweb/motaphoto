@@ -1,12 +1,10 @@
 <?php get_header(); ?>
 <main>
-    <div class="banner_text">
-        <p>Photographe Event</p>
-    </div>
+
     <div class="banner">
         <?php
         $args = array(
-            'post_type' => 'photo',
+            'post_type' => 'photos',
             'posts_per_page' => 1,
             'orderby' => 'rand'
         );
@@ -24,6 +22,9 @@
         endif;
 
         wp_reset_postdata(); ?>
+            </div>
+            <div class="banner_text">
+                <p>Photographe Event</p>
             </div>
     </div>
 
@@ -82,7 +83,7 @@
                 ?>
             </div>
             <div class="sorting">
-                <div class="select_container" id="year_filter">
+                <div class="select_container" id="year-filter">
                     <ul class="placeholder_option">
 
                         <li data-default-text="Trier par">Trier par</li>
@@ -91,7 +92,7 @@
                         <li class="option option_items reset_option" data-value=""></li>
                         <?php
                         global $wpdb;
-                        $years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_type = 'photo' AND post_status = 'publish' ORDER BY post_date DESC");
+                        $years = $wpdb->get_col("SELECT DISTINCT YEAR(post_date) FROM $wpdb->posts WHERE post_type = 'photos' AND post_status = 'publish' ORDER BY post_date DESC");
                         foreach ($years as $year) :
                             $selected = (isset($_GET['year']) && $_GET['year'] == $year) ? 'selected' : '';
                             echo "<li class='option_items' data-value='{$year}' {$selected}>{$year}</li>";
@@ -105,7 +106,7 @@
 
             <?php
             $args = array(
-                'post_type' => 'photo',
+                'post_type' => 'photos',
                 'posts_per_page' => 12,
                 'paged' => 1,
             );
@@ -115,7 +116,7 @@
             if ($photo_query->have_posts()) :
                 while ($photo_query->have_posts()) : $photo_query->the_post();
 
-                    get_template_part('template-parts/photo-block');
+                    get_template_part('template-parts/photos-block');
 
                 endwhile;
                 wp_reset_postdata();

@@ -9,19 +9,27 @@
 
 <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
-    <header class="top">
-        <div class="top_logo">
-            <a href="<?php echo home_url('/'); ?>">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.png" alt="Logo">
-            </a>
+    <header class="top site-header">
+        <div class="main-navigation">
+            <div class="top_logo site-title">
+                <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.png" alt="Logo">
+                </a>
+            </div>
+
+            <div class="burgerMenu">
+                <!-- Icones menu burger -->
+                <div id="icons"></div>
+            </div>
+
+
+            <?php wp_nav_menu(array(
+                'theme_location' => 'main',
+                'container' => 'nav',
+                'container_class' => 'menu-navigation',
+                'menu_id' => 'top_menu',
+                'menu_class' => 'top_menu',
+
+            )); ?>
         </div>
-
-        <?php wp_nav_menu(array(
-            'theme_location' => 'main',
-            'container' => 'nav',
-            'container_class' => 'top_menu_container',
-            'menu_id' => 'top_menu',
-            'menu_class' => 'top_menu',
-
-        )); ?>
     </header>
