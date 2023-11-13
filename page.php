@@ -2,9 +2,14 @@
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-		<h1><?php the_title(); ?></h1>
 
-		<?php the_content(); ?>
+		<main class="main-page">
+			<h1><?php the_title(); ?></h1>
+			<div class="main-page-container">
+				<?php the_content(); ?>
+			</div>
+		</main>
+
 
 <?php endwhile;
 endif; ?>

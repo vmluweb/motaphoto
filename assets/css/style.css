@@ -55,6 +55,9 @@ html {
 body {
   background-color: var(--main-bg-color);
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 h1,
@@ -95,6 +98,11 @@ main,
 .main-single {
   display: flex;
   justify-content: center;
+}
+
+.main-page {
+  display: flex;
+  flex-direction: column;
 }
 
 figure {
@@ -670,6 +678,19 @@ figure {
   transform: rotate(-225deg);
 }
 
+/* A propos */
+.main-page h1 {
+  font-weight: 400;
+  text-align: left;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.main-page-container {
+  display: flex;
+  flex-direction: column;
+}
+
 /* 10_Publication personnalisée sur une single-custom */
 .post {
   display: flex;
@@ -833,6 +854,7 @@ tr.post_info td.post_info_carousel_container {
 
 /* 12_Footer */
 .bottom {
+  /* position: fixed; */
   width: 100%;
   height: 40px;
   bottom: 0;
@@ -840,6 +862,7 @@ tr.post_info td.post_info_carousel_container {
   justify-content: center;
   background-color: var(--main-bg-color);
   border-top: 1px solid var(--main-text-color);
+  margin-top: auto;
 }
 
 .bottom_menu_container {
